@@ -1,0 +1,65 @@
+.navbar{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    margin: 5px 35px;
+    font-size: 25px;
+}
+body{
+    font-family: Arial, sans-serif;
+    background-color:beige;
+    text-align: center;
+    font-size: 18px;
+}
+input{
+    padding: 5px;
+    margin: 10px;
+    width: 200px;
+}
+label{
+    font-size: 18px;
+    margin: 10px;
+}
+button, input[type="submit"]{
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+}
+table{
+    margin: 20px auto;
+    border:1px solid black;
+    width: 80%;
+    align-items: center;
+    border-collapse: collapse;
+}
+tr,td,th{
+    border:1px solid black;
+  
+    padding: 10px;
+}
+form{
+    margin: 60px auto;
+    width: 300px;
+    text-align: left;
+    border:3px solid black;
+    padding: 40px;
+}
+th{
+    background-color: black;
+    color: white;
+    border:1px solid white;
+}
+tr:nth-child(even){
+    background-color:bisque;
+}
