@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .traffic-signal {
+        width: 100px;
+        height: 300px;
+        background-color: #333;
+        border-radius: 20px;
+        margin: 50px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .light {
+        width: 60px;
+        height: 60px;
+        background-color: #555;
+        border-radius: 50%;
+    }
+
+    #red {
+        animation: redLight 6s linear infinite;
+    }
+
+    #yellow {
+        animation: yellowLight 6s linear infinite;
+    }
+
+    #green {
+        animation: greenLight 6s linear infinite;
+    }
+
+    @keyframes redLight {
+
+        0%,
+        33% {
+            background-color: red;
+        }
+
+        33%,
+        100% {
+            background-color: #555;
+        }
+    }
+
+    @keyframes yellowLight {
+
+        0%,
+        33% {
+            background-color: #555;
+        }
+
+        33%,
+        67% {
+            background-color: yellow;
+        }
+
+        67%,
+        100% {
+            background-color: #555;
+        }
+    }
+
+    @keyframes greenLight {
+
+        0%,
+        67% {
+            background-color: #555;
+        }
+
+        67%,
+        100% {
+            background-color: green;
+        }
+    }
+</style>
+
+<body>
+    <h1>Exercise 12 Traffic Signal Animation</h1>
+    <div class="traffic-signal">
+        <div class="light" id="red"></div>
+        <div class="light" id="yellow"></div>
+        <div class="light" id="green"></div>
+    </div>
+
+</body>
+
+</html>

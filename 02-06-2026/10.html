@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .moving-ball {
+            border: 8px solid #000000;
+            background-color: #6793d6;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+            animation: move 2s linear infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(100px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Exercise 11 Bouncing Text</h1>
+    <h1 class="bouncing-text">WELCOME</h1>
+
+</body>
+
+</html>
