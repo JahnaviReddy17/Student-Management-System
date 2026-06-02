@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 /*NAVBAR*/
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 .navbar{
     background-color: black;
     color: white;
@@ -10,8 +7,6 @@
     display: flex;
     justify-content: center;
 }
-<<<<<<< HEAD
-=======
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -39,15 +34,10 @@
         font-size: 10px;
     }
 }
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 nav a{
     color: white;
     text-decoration: none;
     margin: 5px 35px;
-<<<<<<< HEAD
-    font-size: 25px;
-}
-=======
     font-size: 24px;
     transition: all 0.3s ease-in-out;
 }
@@ -59,18 +49,14 @@ nav a:hover{
 
 
 /*GENERAL STYLES*/
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 body{
     font-family: Arial, sans-serif;
     background-color:beige;
     text-align: center;
     font-size: 18px;
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 input{
     padding: 5px;
     margin: 10px;
@@ -89,11 +75,8 @@ button, input[type="submit"]{
     border-radius: 5px;
     font-size: 20px;
 }
-<<<<<<< HEAD
-=======
 
 /*TABLE STYLES*/
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 table{
     margin: 20px auto;
     border:1px solid black;
@@ -106,17 +89,6 @@ tr,td,th{
   
     padding: 10px;
 }
-<<<<<<< HEAD
-form{
-    margin: 60px auto;
-    width: 300px;
-    text-align: left;
-    border:3px solid black;
-    padding: 40px;
-}
-=======
-
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
 th{
     background-color: black;
     color: white;
@@ -124,9 +96,6 @@ th{
 }
 tr:nth-child(even){
     background-color:bisque;
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -192,4 +161,3 @@ form{
         margin: 10px 0;
     }
 }
->>>>>>> 9ce6d36 (CSS Updates in SMS & Exploration of Transitions and Animations - 02-06-2026)
