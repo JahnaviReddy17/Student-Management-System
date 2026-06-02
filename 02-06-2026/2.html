@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+.student-card {
+    column-count: 2;
+    column-gap: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    width:500px;
+    height : 150px;
+    text-align: left;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+.student-card:hover{
+    width:600px;
+    height:200px;
+}
+
+@media (max-width: 320px) {
+    .student-card {
+        column-count: 1;
+        width: 150px;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+</style>
+<body>
+    
+    <div class="student-cards-section">
+        <div class="student-card">
+            <p><img src="../images/student.jpg" width="150" height="100"></p>
+            <p>Name: Jane Smith</p>
+            <p>Branch: Electrical Engineering</p>
+            <p>Email: jane.smith@example.com</p></p>
+
+        </div>
+    </div>
+</body>
+</html>
