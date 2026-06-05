@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
+    <div class="container-fluid"> <a class="navbar-brand text-white " href="#">
+        <img src="./images/image.png" alt="SMS" width="60" height="50" class="p-2">CVR College of Engineering
+      </a></div>
+
+
+    <div class="container">
+      <ul class="navbar-nav w-100 space-between d-flex  justify-content-end align-items-center">
+
+        <li class="nav-item"><a class="nav-link text-white me-3" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white me-3" href="#">Courses</a></li>
+        <li class="nav-item"><a class="nav-link text-white me-3" href="#">About</a></li>
+        <li class="nav-item"><a class="nav-link text-white me-3" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-primary text-white px-3" href="#">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                <div class="card p-4 shadow">
+
+                    <h3 class="text-center mb-3">Student Registration</h3>
+
+                    <form id="registerForm">
+
+                        <div class="mb-3">
+                            <label class="form-label">Student Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" pattern="[0-9]{10}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <select class="form-select" required>
+                                <option value="">Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Course</label>
+                            <select class="form-select" required>
+                                <option value="">Select Course</option>
+                                <option>CSE</option>
+                                <option>CSM</option>
+                                <option>ECE</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Qualification</label>
+                            <input type="text" class="form-control" placeholder="e.g. 12th / Diploma" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea class="form-control" rows="2" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Upload Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" required>
+                            <label class="form-check-label">
+                                I agree to Terms & Conditions
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Register
+                        </button>
+
+                    </form>
+
+                    <div id="successMsg" class="alert alert-success mt-3 d-none">
+                        Registration Successful!
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // stop page reload
+
+            document.getElementById("successMsg").classList.remove("d-none");
+
+            this.reset(); // clear form
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
