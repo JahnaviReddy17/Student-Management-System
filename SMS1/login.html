@@ -17,10 +17,26 @@
     <h1>Login Page</h1>
     <form action="./dashboard.html" method="get">
         <label for="username">Username:</label></br>
-        <input type="text" name="username" placeholder="Enter your username" required></br>
+        <input type="text" name="username" placeholder="Enter your username" required id="username"></br>
         <label for="password">Password:</label></br>
-        <input type="password" name="password" placeholder="Enter your password" required></br>
-        <input type="submit" value="Login">
+        <input type="password" name="password" placeholder="Enter your password" required id="password"></br>
+        <input type="submit" onclick="validateLogin(event)" value="Login">
     </form>
+
+    <script>
+        function validateLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+            if(userData && userData.username === username && userData.password === password) {
+                window.location.href = './dashboard.html';
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+    </script>
 </body>
 </html>

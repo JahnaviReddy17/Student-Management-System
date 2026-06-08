@@ -20,7 +20,8 @@
     <a href="./logout.html">Logout</a><br>
     </nav>
     <h1>Students</h1>
-    <table>
+    
+    <table id="students-table">
         <tr>
             <th>Name</th>
             <th>Roll Number</th>
@@ -29,66 +30,42 @@
             <th>Actions</th>
         </tr>
         <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
+            
         </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>67890</td>
-            <td>9.0</td>
-            <td>Electrical Engineering</td>
-            <td>
-                <a href="./edit-student.html">Edit</a>
-                <a href="./view-students.html">Delete</a>
-            </td>
-        </tr>
-        
     </table>
+    <script>
+        function loadStudents() {
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            const table = document.getElementById('students-table');
+            students.forEach(student => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = student.name;
+                row.insertCell(1).innerText = student.rollno;
+                row.insertCell(2).innerText = student.cgpa;
+                row.insertCell(3).innerText = student.branch;
+                const actionsCell = row.insertCell(4);
+                const editButton = document.createElement('button');
+                editButton.innerText = 'Edit';
+                editButton.onclick = () => editStudent(student);
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Delete';
+                deleteButton.onclick = () => deleteStudent(student);
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        function editStudent(student) {
+            //
+        }
+
+        function deleteStudent(student) {
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            const updatedStudents = students.filter(s => s.rollno !== student.rollno);
+            localStorage.setItem('students', JSON.stringify(updatedStudents));
+        }
+
+        window.onload = loadStudents;
+    </script>
 </body>
 </html>
