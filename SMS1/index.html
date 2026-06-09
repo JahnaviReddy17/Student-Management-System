@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System</title>
     <link rel="stylesheet" href="./CSS/styles.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -13,20 +15,36 @@
         <a href="./index.html">Home</a><br>
         
         <a href="./about.html">About</a><br>
-        <a href="./courses.html">Courses</a><br>
-        <a href="./contact.html">Contact</a><br>
         <a href="./login.html">Login</a><br>
+        <a href="./register.html">Register</a>
+        <a href="./logout.html">Logout</a>
     </nav>
     
     <h1>Welcome to the Student Management System</h1>
     <form action="./dashboard.html" method="get">
         <label for="username">Username:</label></br>
-        <input type="text" name="username" placeholder="Enter your username" required></br></br>
+        <input type="text" name="username" placeholder="Enter your username" required id="username"></br></br>
         <label for="password">Password:</label></br>
-        <input type="password" name="password" placeholder="Enter your password" required></br></br>
-        <input type="submit" class="login-submit-btn" value="Login">
+        <input type="password" name="password" placeholder="Enter your password" required id="password"></br></br>
+        <input type="submit" class="login-submit-btn" value="Login" onclick="validateLogin(event)">
         
         <p>No Account?<a href="./register.html">Register Here</a></p><br>
     </form>
+    <script>
+        function validateLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+           
+            if(userData && userData.username === username && userData.password === password) {
+                window.location.href = './dashboard.html';
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+    </script>
 </body>
 </html>

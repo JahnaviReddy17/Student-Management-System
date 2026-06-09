@@ -1,30 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="./CSS/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
-        
+
         <img src="./images/logo.jpg" alt="Logo" class="logo" width="50px" height="40px" style="border-radius: 50%;">
         <a href="./index.html">Home</a>
         <a href="./login.html">Login</a>
         <a href="./register.html">Register</a>
     </nav>
     <h1>Register Page</h1>
-    <form action="./dashboard.html" method="get">
+    <form action="./login.html" method="get">
         <label for="username">Username:</label></br>
-        <input type="text" name="username" placeholder="Enter your username" required></br>
-        <label for="email">Email:</label>   </br>
-        <input type="email" name="email" placeholder="Enter your email" required></br>
+        <input type="text" name="username" placeholder="Enter your username" required id="username"></br>
+        <label for="email">Email:</label> </br>
+        <input type="email" name="email" placeholder="Enter your email" required id="email"></br>
         <label for="password">Password:</label></br>
-        <input type="password" name="password" placeholder="Enter your password" required></br>
+        <input type="password" name="password" placeholder="Enter your password" required id="password"></br>
         <label for="confirm_password">Confirm Password:</label></br>
-        <input type="password" name="confirm_password" placeholder="Confirm your password" required></br>
-        <input type="submit" value="Register">
+        <input type="password" name="confirm_password" placeholder="Confirm your password" required id="confirm_password"></br>
+        <input type="submit" onclick="storeData()" value="Register">
     </form>
+
+    <script>
+        function storeData() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if(password!==confirmPassword){
+                alert("Passwords do not match!");
+                return;
+            }
+
+            const regexp = /^[a-zA-Z0-9_]{8,20}$/ && /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_]{8,20}$/;
+            if(!regexp.test(password)){
+                alert("Password must be 8-20 characters long and can only contain letters, numbers, and underscores.");
+                window.location.href = './register.html';
+            }
+
+            if(username && email && password) {
+                const userData = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+            }
+        } 
+    </script>
 </body>
+
 </html>
