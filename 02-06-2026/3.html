@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRID DEMONSTRATION</title>
+</head>
+<style>
+    
+.gallery{
+    width: 60%;
+    grid-gap: 10px;
+    justify-content: center;
+    display:grid;
+    margin-left: 400px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.gallery img{
+    height: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+
+@media (max-width: 375px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        margin-left: 70px;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 768px) {
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+         margin-left: 170px;
+    }
+}
+body{
+    background-color:beige;
+    text-align: center;
+    font-size: 18px;
+}
+
+</style>
+<body>
+    
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" width="200">
+    </div>
+</body>
+</html>

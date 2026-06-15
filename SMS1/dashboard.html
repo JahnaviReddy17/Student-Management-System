@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./CSS/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     
@@ -57,12 +58,21 @@
         }
 
         function editStudent(student) {
-            //
+
+            // Implement edit functionality
+            localStorage.setItem('editedStudent', JSON.stringify(student));
+            window.location.href = './edit-student.html';
         }
 
         function deleteStudent(student) {
             const students = JSON.parse(localStorage.getItem('students')) || [];
-            const updatedStudents = students.filter(s => s.rollno !== student.rollno);
+            //const updatedStudents = students.filter(s => s.rollno !== student.rollno);
+            const updatedStudents = []
+            for(s in students){
+                if(students[s]!==student){
+                    updatedStudents.push(students[s]);
+                }
+            }
             localStorage.setItem('students', JSON.stringify(updatedStudents));
         }
 

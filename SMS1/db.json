@@ -7,6 +7,13 @@
       "cgpa": "8",
       "branch": "Civil Engineering",
       "id": 1
+    },
+    {
+      "name": "Jahnavi Reddy",
+      "rollno": "2658225883",
+      "cgpa": "8",
+      "branch": "Civil Engineering",
+      "id": 2
     }
   ]
 }
