@@ -1,54 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Student</title>
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
-
 <body>
-    <nav class="navbar">
 
-        <img src="./images/logo.jpg" alt="Logo" class="logo" width="50px" height="40px" style="border-radius: 50%;">
-        <a href="./add-student.html">Add Student</a>
-        <a href="./view-students.html">View Students</a>
-        <a href="./logout.html">Logout</a>
-    </nav>
-    <h1>Add Student</h1>
-    <form action="./view-students.html" method="get">
-        <label for="name">Name:</label></br>
-        <input type="text" name="name" id="name" placeholder="Enter student's name" required></br>
-        <label for="rollno">Roll Number:</label></br>
-        <input type="text" name="rollno" id="rollno" placeholder="Enter student's roll number" required></br>
-        <label for="cgpa">CGPA:</label></br>
-        <input type="number" name="cgpa" id="cgpa" placeholder="Enter student's CGPA" required></br>
-        <label for="branch">Branch:</label></br>
-        <select name="branch" id="branch" required style="width: 300px;height: 40px;">
-            <option value="">Select branch</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
-            <option value="Civil Engineering">Civil Engineering</option>
-        </select></br></br>
-        <button type="submit" onclick="addStudent(event)">Add Student</button>
-    </form>
-    <script>
-        function addStudent(event) {
-            event.preventDefault(); // Prevent form submission  
-            const name = document.getElementById('name').value;
-            const rollno = document.getElementById('rollno').value;
-            const cgpa = document.getElementById('cgpa').value;
-            const branch = document.getElementById('branch').value;
+<nav class="navbar">
+    <img src="./images/logo.jpg" alt="Logo" class="logo"
+         width="50" height="40" style="border-radius:50%;">
 
-            const student = { name, rollno, cgpa, branch };
-            let students = JSON.parse(localStorage.getItem('students')) || [];
-            students.push(student);
-            localStorage.setItem('students', JSON.stringify(students));
-            window.location.href = './view-students.html';
+    <a href="./add-student.html">Add Student</a>
+    <a href="./view-students.html">View Students</a>
+    <a href="./logout.html">Logout</a>
+</nav>
+
+<h1>Add Student</h1>
+
+<form id="student-form">
+
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"
+           placeholder="Enter student's name" required><br><br>
+
+    <label for="rollno">Roll Number:</label><br>
+    <input type="text" id="rollno" name="rollno"
+           placeholder="Enter student's roll number" required><br><br>
+
+    <label for="cgpa">CGPA:</label><br>
+    <input type="number" id="cgpa" name="cgpa"
+           min="0" max="10" step="0.01"
+           placeholder="Enter student's CGPA" required><br><br>
+
+    <label for="branch">Branch:</label><br>
+    <select id="branch" name="branch" required>
+        <option value="">Select branch</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Electrical Engineering">Electrical Engineering</option>
+        <option value="Mechanical Engineering">Mechanical Engineering</option>
+        <option value="Civil Engineering">Civil Engineering</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Add Student</button>
+
+</form>
+
+<script>
+document.getElementById("student-form")
+        .addEventListener("submit", addStudent);
+
+async function addStudent(event) {
+    event.preventDefault();
+
+    const student = {
+        name: document.getElementById("name").value,
+        rollno: document.getElementById("rollno").value,
+        cgpa: document.getElementById("cgpa").value,
+        branch: document.getElementById("branch").value
+    };
+
+    try {
+        const response = await fetch(
+            "http://localhost:3000/students",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(student)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to add student");
         }
-    </script>
-</body>
 
+        alert("Student added successfully!");
+        window.location.href = "./view-students.html";
+
+    } catch (error) {
+        console.error(error);
+        alert("Error adding student");
+    }
+}
+</script>
+
+</body>
 </html>

@@ -1,0 +1,12 @@
+{
+  "users": [],
+  "students": [
+    {
+      "name": "hyderabad",
+      "rollno": "67",
+      "cgpa": "8",
+      "branch": "Civil Engineering",
+      "id": 1
+    }
+  ]
+}

@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,111 +7,162 @@
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="./images/logo.jpg" alt="Logo" class="logo"
-             width="50" height="40" style="border-radius: 50%;">
 
-        <a href="./add-student.html">Add Student</a>
-        <a href="./view-students.html">View Students</a>
-        <a href="./logout.html">Logout</a>
-    </nav>
+<nav class="navbar">
 
-    <h1>Edit Student</h1>
+    <img src="./images/logo.jpg"
+         alt="Logo"
+         width="50"
+         height="40"
+         style="border-radius:50%;">
 
-    <form id="edit-student-form">
-        <label for="name">Name:</label><br>
-        <input type="text" name="name" placeholder="Enter student's name" required>
-        <br><br>
+    <a href="./add-student.html">Add Student</a>
+    <a href="./view-students.html">View Students</a>
+    <a href="./logout.html">Logout</a>
 
-        <label for="rollno">Roll Number:</label><br>
-        <input type="text" name="rollno" placeholder="Enter student's roll number" required>
-        <br><br>
+</nav>
 
-        <label for="cgpa">CGPA:</label><br>
-        <input type="number" name="cgpa" placeholder="Enter student's CGPA"
-               min="0" max="10" step="0.01" required>
-        <br><br>
+<h1>Edit Student</h1>
 
-        <label for="branch">Branch:</label><br>
-        <select name="branch" required>
-            <option value="">Select branch</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
-            <option value="Civil Engineering">Civil Engineering</option>
-        </select>
-        <br><br>
+<form id="edit-student-form">
 
-        <button type="submit" id="edit-student-button">
-            Edit Student
-        </button>
-    </form>
+    <label for="name">Name:</label><br>
+    <input type="text"
+           id="name"
+           name="name"
+           required>
+    <br><br>
 
-    <script>
-        function loadStudentData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const originalRollno = urlParams.get('rollno');
+    <label for="rollno">Roll Number:</label><br>
+    <input type="text"
+           id="rollno"
+           name="rollno"
+           required>
+    <br><br>
 
-            const students = JSON.parse(localStorage.getItem('students')) || [];
+    <label for="cgpa">CGPA:</label><br>
+    <input type="number"
+           id="cgpa"
+           name="cgpa"
+           min="0"
+           max="10"
+           step="0.01"
+           required>
+    <br><br>
 
-            const student = students.find(
-                s => s.rollno === originalRollno
+    <label for="branch">Branch:</label><br>
+    <select id="branch"
+            name="branch"
+            required>
+
+        <option value="">Select branch</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Electrical Engineering">Electrical Engineering</option>
+        <option value="Mechanical Engineering">Mechanical Engineering</option>
+        <option value="Civil Engineering">Civil Engineering</option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Update Student
+    </button>
+
+</form>
+
+<script>
+async function loadStudentData() {
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const id = urlParams.get("id");
+
+    try {
+
+        const response =
+            await fetch(
+                `http://localhost:3000/students/${id}`
             );
 
-            if (!student) {
-                alert("Student not found!");
-                window.location.href = "./view-students.html";
-                return;
+        const student =
+            await response.json();
+
+        document.getElementById("name").value =
+            student.name;
+
+        document.getElementById("rollno").value =
+            student.rollno;
+
+        document.getElementById("cgpa").value =
+            student.cgpa;
+
+        document.getElementById("branch").value =
+            student.branch;
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error loading student");
+    }
+
+    document.getElementById("edit-student-form")
+        .addEventListener("submit",
+            async function(event) {
+
+        event.preventDefault();
+
+        const updatedStudent = {
+
+            name:
+                document.getElementById("name").value,
+
+            rollno:
+                document.getElementById("rollno").value,
+
+            cgpa:
+                document.getElementById("cgpa").value,
+
+            branch:
+                document.getElementById("branch").value
+        };
+
+        try {
+
+            const response =
+                await fetch(
+                    `http://localhost:3000/students/${id}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body:
+                            JSON.stringify(updatedStudent)
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error();
             }
 
-            document.querySelector('input[name="name"]').value = student.name;
-            document.querySelector('input[name="rollno"]').value = student.rollno;
-            document.querySelector('input[name="cgpa"]').value = student.cgpa;
-            document.querySelector('select[name="branch"]').value = student.branch;
+            alert("Student updated successfully!");
 
-            document.getElementById('edit-student-form').addEventListener('submit', function (event) {
-                event.preventDefault();
+            window.location.href =
+                "./view-students.html";
 
-                const name = document.querySelector('input[name="name"]').value.trim();
-                const rollno = document.querySelector('input[name="rollno"]').value.trim();
-                const cgpa = document.querySelector('input[name="cgpa"]').value;
-                const branch = document.querySelector('select[name="branch"]').value;
+        } catch (error) {
 
-                // Check for duplicate roll number
-                const duplicate = students.some(
-                    s => s.rollno === rollno && s.rollno !== originalRollno
-                );
-
-                if (duplicate) {
-                    alert("Roll number already exists!");
-                    return;
-                }
-
-                const updatedStudent = {
-                    name,
-                    rollno,
-                    cgpa,
-                    branch
-                };
-
-                const updatedStudents = students.map(student =>
-                    student.rollno === originalRollno
-                        ? updatedStudent
-                        : student
-                );
-
-                localStorage.setItem(
-                    'students',
-                    JSON.stringify(updatedStudents)
-                );
-
-                alert("Student updated successfully!");
-                window.location.href = "./view-students.html";
-            });
+            console.error(error);
+            alert("Error updating student");
         }
+    });
+}
 
-        window.onload = loadStudentData;
-    </script>
+window.onload = loadStudentData;
+</script>
+
 </body>
 </html>
-```

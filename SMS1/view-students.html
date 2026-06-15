@@ -7,17 +7,22 @@
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        
-        <img src="./images/logo.jpg" alt="Logo" class="logo" width="50px" height="40px" style="border-radius: 50%;">
+
+<nav class="navbar">
+    <img src="./images/logo.jpg" alt="Logo"
+         width="50" height="40"
+         style="border-radius:50%;">
+
     <a href="./add-student.html">Add Student</a>
     <a href="./view-students.html">View Students</a>
     <a href="./contact.html">Contact</a>
-    <a href="./logout.html">Logout</a><br>
-    </nav>
+    <a href="./logout.html">Logout</a>
+</nav>
 
-    <h1>Students</h1>
-    <table id="students-table">
+<h1>Students</h1>
+
+<table id="students-table" border="1">
+    <thead>
         <tr>
             <th>Name</th>
             <th>Roll Number</th>
@@ -25,46 +30,93 @@
             <th>Branch</th>
             <th>Actions</th>
         </tr>
-        <tr>
-            
-        </tr>
-    </table>
-    <script>
-        function loadStudents() {
-            const students = JSON.parse(localStorage.getItem('students')) || [];
-            const table = document.getElementById('students-table');
-            students.forEach(student => {
-                const row = table.insertRow();
-                row.insertCell(0).innerText = student.name;
-                row.insertCell(1).innerText = student.rollno;
-                row.insertCell(2).innerText = student.cgpa;
-                row.insertCell(3).innerText = student.branch;
-                const actionsCell = row.insertCell(4);
-                const editButton = document.createElement('button');
-                editButton.innerText = 'Edit';
-                editButton.onclick = () => editStudent(student);
-                const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'Delete';
-                deleteButton.onclick = () => deleteStudent(student);
-                actionsCell.appendChild(editButton);
-                actionsCell.appendChild(deleteButton);
-            });
+    </thead>
+
+    <tbody></tbody>
+</table>
+
+<script>
+async function loadStudents() {
+
+    try {
+
+        const response =
+            await fetch("http://localhost:3000/students");
+
+        const students = await response.json();
+
+        const tbody =
+            document.querySelector("#students-table tbody");
+
+        tbody.innerHTML = "";
+
+        students.forEach(student => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${student.name}</td>
+                <td>${student.rollno}</td>
+                <td>${student.cgpa}</td>
+                <td>${student.branch}</td>
+                <td>
+                    <button onclick="editStudent(${student.id})">
+                        Edit
+                    </button>
+
+                    <button onclick="deleteStudent(${student.id})">
+                        Delete
+                    </button>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error loading students");
+    }
+}
+
+function editStudent(id) {
+    window.location.href =
+        `./edit-student.html?id=${id}`;
+}
+
+async function deleteStudent(id) {
+
+    const confirmDelete =
+        confirm("Are you sure you want to delete this student?");
+
+    if (!confirmDelete) return;
+
+    try {
+
+        const response =
+            await fetch(
+                `http://localhost:3000/students/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error();
         }
 
-        function editStudent(student) {
-            // Implement edit functionality
-            window.location.href = `./edit-student.html?rollno=${student.rollno}`;
-        }
+        loadStudents();
 
-        function deleteStudent(student) {
-            const students = JSON.parse(localStorage.getItem('students')) || [];
-            const updatedStudents = students.filter(s => s.rollno !== student.rollno);
-            localStorage.setItem('students', JSON.stringify(updatedStudents));
+    } catch (error) {
 
-            window.location.reload();
-        }
+        console.error(error);
+        alert("Error deleting student");
+    }
+}
 
-        window.onload = loadStudents;
-    </script>
+window.onload = loadStudents;
+</script>
+
 </body>
 </html>
