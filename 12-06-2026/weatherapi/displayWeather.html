@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <form onsubmit="fetchWeather(event)">
+        <div class="m-5 rounded p-2">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-body m-2 text-center">
+                            <h1 class="card-title m-2">Weather</h1>
+
+                            <input class="m-2 rounded" placeholder="Enter City" id="city">
+
+                            <button class="btn btn-primary" type="submit">
+                                Search <i class="bi bi-search"></i>
+                            </button>
+
+                            <div class="m-3">
+                                <h3 id="cityname"></h3>
+                                <h4 id="temp"></h4>
+                                <h4 id="condition"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        async function fetchWeather(event) {
+            event.preventDefault();
+
+            const city = document.getElementById('city').value;
+
+            if (!city) {
+                alert('Enter City Name');
+                return;
+            }
+
+            const res = await fetch(
+                `https://api.weatherapi.com/v1/current.json?key=c16e57bc9db043b2a0e104719260803&q=${city}`
+            );
+
+            const data = await res.json();
+
+            document.getElementById('cityname').innerText =
+                `${data.location.name}, ${data.location.country}`;
+
+            document.getElementById('temp').innerText =
+                `Temperature: ${data.current.temp_c}°C`;
+
+            document.getElementById('condition').innerText =
+                `Condition: ${data.current.condition.text}`;
+
+        }
+    </script>
+</body>
+
+</html>
